@@ -1,6 +1,9 @@
 import time
 import warnings
 import threading
+import sys
+sys.path.insert(0,'/usr/lib/chromium-browser/chromedriver')
+
 
 from selenium import webdriver
 from selenium.webdriver.support.wait import WebDriverWait
