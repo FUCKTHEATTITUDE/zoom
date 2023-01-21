@@ -339,5 +339,5 @@ if __name__ == '__main__':
     number = int(input("Enter number of Users: "))
     meetingcode = input("Enter meeting code (No Space): ")
     passcode = input("Enter Password (No Space): ")
-    sec = 100
+    sec = 20
     main()
