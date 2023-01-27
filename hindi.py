@@ -75,7 +75,7 @@ def get_driver(proxy):
     options.add_argument("--start-maximized")
     if proxy is not None:
         options.add_argument(f"--proxy-server={proxy}")
-    driver = webdriver.Chrome(executable_path='/snap/chromium/2295/usr/lib/chromium-browser/chrome',options=options)
+    driver = webdriver.Chrome('chrome',options=options)
     return driver
 
 
