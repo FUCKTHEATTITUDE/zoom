@@ -75,6 +75,7 @@ def get_driver(proxy):
     options.add_argument("--start-maximized")
     if proxy is not None:
         options.add_argument(f"--proxy-server={proxy}")
+    driver = webdriver.Chrome(executable_path='/usr/lib/chromium-browser/chromedriver')
     driver = webdriver.Chrome('chromedriver', options=options)
     return driver
 
