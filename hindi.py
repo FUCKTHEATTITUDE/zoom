@@ -4,6 +4,14 @@ import threading
 import sys
 sys.path.insert(0,'/usr/lib/chromium-browser/chromedriver')
 
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+service = Service(executable_path=ChromeDriverManager().install())
+driver = webdriver.Chrome(service=service)
+from selenium.webdriver.common.by import By
+
 from faker import Faker
 from selenium import webdriver
 from selenium.webdriver.support.wait import WebDriverWait
@@ -75,7 +83,8 @@ def get_driver(proxy):
     options.add_argument("--start-maximized")
     if proxy is not None:
         options.add_argument(f"--proxy-server={proxy}")
-    driver = webdriver.Chrome('chrome',options=options)
+      
+    driver = webdriver.Chrome(options=options)
     return driver
 
 
