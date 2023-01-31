@@ -14,9 +14,7 @@ driver = webdriver.Chrome(options=options)
 from selenium.webdriver.common.by import By
 
 from faker import Faker
-from selenium import webdriver
 from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as ec
 
 
