@@ -1,8 +1,9 @@
 import time
 import warnings
 import threading
-import sys
-sys.path.insert(0,'/usr/lib/chromium-browser/chromedriver')
+import os
+import subprocess
+from importlib.resources import path
 
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
