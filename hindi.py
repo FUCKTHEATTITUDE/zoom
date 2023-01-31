@@ -84,7 +84,7 @@ def get_driver(proxy):
     if proxy is not None:
         options.add_argument(f"--proxy-server={proxy}")
       
-    driver = webdriver.Chrome(options=options)
+    driver = webdriver.Chrome(ChromeDriverManager().install(),options=options)
     return driver
 
 
