@@ -9,8 +9,8 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
-options = options(executable_path=ChromeDriverManager().install())
-driver = webdriver.Chrome(options=options)
+service = Service(executable_path=ChromeDriverManager().install())
+driver = webdriver.Chrome(service=service)
 from selenium.webdriver.common.by import By
 
 from faker import Faker
