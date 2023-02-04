@@ -1,14 +1,13 @@
 import time
 import warnings
 import threading
+import sys
 
-
+from faker import Faker
 from selenium import webdriver
-from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as ec
-
 
 
 proxylist = [
@@ -45,213 +44,7 @@ proxylist = [
 ]
 
 warnings.filterwarnings('ignore')
-fake = [
-'David Asir',
-'Mohammed UAE',
-'Victor Sam',
-'SENTHILKUMAR DUBAI',
-'Tamilarasan',
-'NAWAZ KHALEEL',
-'Samimii',
-'PEER MOHAMMAD',
-'L Krishnakumar',
-'Yuvanathan',
-'MANJU',
-'Muthubabu',
-'Christopher Asir Dass',
-'KITTY',
-'Prabhakar',
-'Neranjan',
-'Muralidhar',
-'S ANANYA',
-'Anushka',
-'Devi Gayathri',
-'Divya shree',
-'Imarankhan',
-'Jasmine Stella',
-'Jayaraman',
-'Jhansi *Crypto*',
-'KAVITHA R',
-'Khanchana',
-'Kavya Kumar',
-'Malathi',
-'Panneer Selvam',
-'Sumathi Arun',
-'Mayadevi',
-'Meeramadavan',
-'Navyasundar',
-'Nila guru',
-'Priyadhrasini',
-'Ganesamoorthi',
-'Gurugularaman',
-'Ramamoorthy',
-'Sivabalan',
-'Siva subramanian',
-'Kumaresan',
-'Rojamuthu',
-'Sanvikabalu',
-'Sathyanarayanan',
-'gopalakrishnan',
-'Sita Narayanan',
-'Williams',
-'Veerakumar',
-'Zahara beevi',
-'Kumaravel',
-'Shanthinathan',
-'Hariharan',
-'AMSAVENI',
-'Darshan',
-'SK Lakshana ',
-'Alagarsamy',
-'BABU KV',
-'Elangovan',
-'Rajan',
-'Prashanth',
-'Palanisamy',
-'poovithan',
-'Akashaya',
-'Mithilesh ',
-'Nithish Sai Ram',
-'Ramasubbu',
-'Sam Daniel ',
-'Arul Edwin Prabhakar ',
-'Sridevi S',
-'Mohammad Nadeem',
-'Gnanam',
-'Farhan',
-'Rassul Haris',
-'Ashok kumar',
-'Nagaraj covai',
-'Saatvika',
-'Krishna Kumar',
-'Yuvaraj',
-'Varundev',
-'Vishnu shastri',
-'tharun',
-'Sam Paul',
-'Venkat subramanian',
-'Vivesh Balan',
-'Kapilan R',
-'Vetrivel',
-'Abhishek E',
-'Divyesh Narayanan',
-'Gokul L',
-'Srinanthan',
-'Preethi Sundar',
-'Kavinraj',
-'Subhash',
-'Sabarimathan',
-'DAYANITHI',
-'Essaki Subbiah',
-'Pradeep Kumar',
-'Pranav Suresh',
-'Mosas ',
-'Varshan',
-'Raj nagul',
-'Dinesh Kumar ',
-'Tharul Krishna',
-'Asvin Karthick',
-'kishore',
-'Manikandan',
-'Sai pranav',
-'Sundaresan',
-'Ruthran',
-'BalajiKumar',
-'Harshan',
-'Sanjeev',
-'Selvaraj',
-'R.K.vinoth',
-'Tamilprasath',
-'Uthayasuriya',
-'Veeramani',
-'Giriraj',
-'Kanmani',
-'Meenakumari',
-'Kayalabbas',
-'Chockalingam',
-'Srinivasagam',
-'Murugavel',
-'Chandrasekaran',
-'Petchikumar',
-'Haja Modieen',
-'Rangasamy',
-'Mohandas',
-'Subramani',
-'Jabber basha',
-'Thabasuraj',
-'Dhamodharan',
-'Madhan',
-'Nageswaran',
-'Queensly',
-'Xavier Sam',
-'Vellammal',
-'Vellaismy',
-'Jacob',
-'Thalavai Sundram',
-'Chiranjeevi',
-'Deviprasad',
-'Dhanasingh',
-'DHIVAKAR',
-'GEMINI',
-'Eknath',
-'Govardhan',
-'Govindaraj',
-'Guru Prasad',
-'Hemanth',
-'Jeeva Arun',
-'jawahar',
-'Kailash',
-'KapilDev',
-'Karunakaran',
-'Keeethivasan',
-'Laxman',
-'Kuberan',
-'Mithiran',
-'Prasanna Kumar',
-'Premrajasingh',
-'Ramprasad',
-'Rahul Saran',
-'Rohith',
-'Sachin',
-'Sai Shankar',
-'Koothai',
-'Sooraj',
-'Yuvan',
-'Vishva',
-'Uma Rani',
-'Vamsikrishna',
-'k Sripathi',
-'Kaarthika ',
-'Kavitha',
-'komalavalli',
-'Krija Vaithiyanathan',
-'Khushboo',
-'KULANTHIVEL',
-'Ramya',
-'Rajeswari',
-'RAMANI',
-'ranjitha',
-'Revathi',
-'Rosanna',
-'Wajeeha',
-'Nagalakshmi',
-'NADHIYA',
-'Nalini',
-'Neelaveni',
-'Sudhan Veluchamy',
-'Parvathi',
-'Padmapriya',
-'Panimalar',
-'Priyadhrasini',
-'Priyanka',
-'Pradiksha',
-'Boobalan Relanak',
-'Tamaraiselvi',
-'Mala Shankar',
-'Maruthupaniyan',
-'Mathumitha',
-'Padmavathi']
-
+fake = Faker('en_IN')
 MUTEX = threading.Lock()
 
 
@@ -262,7 +55,7 @@ def sync_print(text):
 
 
 def get_driver(proxy):
-    user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.5414.74 Safari/537.36"
+    user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.83 Safari/537.36"
     options = webdriver.ChromeOptions()
     options.headless = True
     options.add_argument(f'user-agent={user_agent}')
@@ -270,21 +63,19 @@ def get_driver(proxy):
     options.add_argument("--window-size=1920,1080")
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-shm-usage')
-    options.add_argument("--disable-infobars")
     options.add_argument('--ignore-certificate-errors')
     options.add_argument('--allow-running-insecure-content')
     options.add_argument("--disable-extensions")
     options.add_argument("--proxy-server='direct://'")
     options.add_argument("--proxy-bypass-list=*")
-    options.add_argument("--use-fake-device-for-media-stream")
     options.add_argument("--start-maximized")
     if proxy is not None:
         options.add_argument(f"--proxy-server={proxy}")
-    driver = webdriver.Chrome(executable_path=ChromeDriverManager().install()), options=options)
+    driver = webdriver.Chrome('/usr/bin/chromedriver', options=options)
     return driver
 
 
-def driver_wait(driver, locator, by, secs=1, condition=ec.element_to_be_clickable):
+def driver_wait(driver, locator, by, secs=10, condition=ec.element_to_be_clickable):
     wait = WebDriverWait(driver=driver, timeout=secs)
     element = wait.until(condition((by, locator)))
     return element
@@ -316,13 +107,12 @@ def main():
     wait_time = sec * 60
     workers = []
     for i in range(number):
-        fakes = fake[i]
         try:
             proxy = proxylist[i]
         except IndexError:
             proxy = None
         try:
-            user = fakes
+            user = fake.name()
         except IndexError:
             break
         wk = threading.Thread(target=start, args=(
