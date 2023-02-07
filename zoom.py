@@ -2,6 +2,7 @@ import time
 import warnings
 import threading
 import sys
+sys.path.insert(0,'/usr/lib/chromium-browser/chromedriver')
 
 from faker import Faker
 from selenium import webdriver
